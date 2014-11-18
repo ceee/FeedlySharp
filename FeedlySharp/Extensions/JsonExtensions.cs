@@ -27,6 +27,28 @@ namespace FeedlySharp.Extensions
 
 
 
+  public class TimeSpanConverter : JsonConverter
+  {
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    {
+      writer.WriteValue(((TimeSpan)value).TotalSeconds);
+    }
+
+    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    {
+      double doubleVal;
+      bool isSuccess = Double.TryParse(reader.Value.ToString(), out doubleVal);
+      return reader.Value == null || !isSuccess ? default(TimeSpan) : TimeSpan.FromSeconds(doubleVal);
+    }
+
+    public override bool CanConvert(Type objectType)
+    {
+      return objectType == typeof(TimeSpan);
+    }
+  }
+
+
+
   public class UnixDateTimeConverter : DateTimeConverterBase
   {
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

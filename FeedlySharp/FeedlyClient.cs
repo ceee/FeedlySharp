@@ -16,7 +16,7 @@ namespace FeedlySharp
 
     private readonly string RedirectUri;
 
-    private string CloudUri { get { return GetCloudUri(CloudEnvironment.Production); } }
+    private string CloudUri { get { return GetCloudUri(Environment); } }
 
     private FeedlyHttpClient Client { get; set; }
 

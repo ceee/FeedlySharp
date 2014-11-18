@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FeedlySharp.Extensions;
+using Newtonsoft.Json;
+using System;
 
 namespace FeedlySharp.Models
 {
@@ -14,16 +16,22 @@ namespace FeedlySharp.Models
   }
 
 
+  [JsonObject]
   public class AccessTokenResponse
   {
     public string Id { get; set; }
 
+    [JsonProperty("access_token")]
     public string AccessToken { get; set; }
 
-    public int ExpiresIn { get; set; }
+    [JsonProperty("expires_in")]
+    [JsonConverter(typeof(TimeSpanConverter))]
+    public TimeSpan ExpiresIn { get; set; }
 
+    [JsonProperty("refresh_token")]
     public string RefreshToken { get; set; }
 
+    [JsonProperty("plan")]
     public FeedlyUserAccountPlan UserAccountPlan { get; set; } 
   }
 
