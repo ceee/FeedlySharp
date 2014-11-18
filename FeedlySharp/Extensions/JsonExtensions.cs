@@ -43,7 +43,7 @@ namespace FeedlySharp.Extensions
 
     public override bool CanConvert(Type objectType)
     {
-      return objectType == typeof(TimeSpan);
+      return objectType == typeof(TimeSpan) || objectType == typeof(TimeSpan?);
     }
   }
 
@@ -57,12 +57,12 @@ namespace FeedlySharp.Extensions
       DateTime epoc = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
       var delta = date.Subtract(epoc);
 
-      writer.WriteValue((int)Math.Truncate(delta.TotalSeconds));
+      writer.WriteValue((int)Math.Truncate(delta.TotalMilliseconds));
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
-      if (reader.Value.ToString() == "0")
+      if (reader.Value.ToString() == "0" || reader.Value == null)
       {
         return null;
       }
@@ -72,7 +72,12 @@ namespace FeedlySharp.Extensions
         return null;
       }
 
-      return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Convert.ToDouble(reader.Value));
+      return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(Convert.ToDouble(reader.Value));
+    }
+
+    public override bool CanConvert(Type objectType)
+    {
+      return objectType == typeof(DateTime) || objectType == typeof(DateTime?);
     }
   }
 

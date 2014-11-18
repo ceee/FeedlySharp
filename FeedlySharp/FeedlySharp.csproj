@@ -38,8 +38,10 @@
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="FeedlyClient.Auth.cs" />
     <Compile Include="FeedlyClient.cs" />
+    <Compile Include="FeedlyClient.User.cs" />
     <Compile Include="FeedlyHttpClient.cs" />
     <Compile Include="FeedlySharpException.cs" />
+    <Compile Include="Models\FeedlyUser.cs" />
     <Compile Include="Models\Responses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

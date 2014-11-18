@@ -18,6 +18,8 @@ namespace FeedlySharp
 
     private string CloudUri { get { return GetCloudUri(Environment); } }
 
+    private string AccessToken { get; set; }
+
     private FeedlyHttpClient Client { get; set; }
 
 
@@ -36,6 +38,13 @@ namespace FeedlySharp
     }
 
 
+    public void Activate(string accessToken)
+    {
+      AccessToken = accessToken;
+      Client.AccessToken = accessToken;
+    }
+
+
     private string GetCloudUri(CloudEnvironment environment)
     {
       return String.Format("https://{0}.feedly.com", environment == CloudEnvironment.Production ? "cloud" : "sandbox");
@@ -46,11 +55,11 @@ namespace FeedlySharp
     {
       Client.Dispose();
     }
+  }
 
-    public enum CloudEnvironment
-    {
-      Production,
-      Sandbox
-    }
+  public enum CloudEnvironment
+  {
+    Production,
+    Sandbox
   }
 }

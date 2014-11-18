@@ -15,6 +15,9 @@ namespace FeedlySharp
 {
   internal class FeedlyHttpClient : HttpClient
   {
+    public string AccessToken { get; set; }
+
+
     public FeedlyHttpClient(Uri baseUri) : base()
     {
       BaseAddress = baseUri;
@@ -22,19 +25,39 @@ namespace FeedlySharp
     }
 
 
-    public async Task<T> Request<T>(HttpMethod method, string requestUri, Dictionary<string, string> parameters, CancellationToken cancellationToken = default(CancellationToken)) where T : class, new()
+    public async Task<T> AuthRequest<T>(HttpMethod method, string requestUri, Dictionary<string, string> parameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class, new()
+    {
+      if (String.IsNullOrEmpty(AccessToken))
+      {
+        throw new FeedlySharpException("This request requires an access token.");
+      }
+      
+      return await Request<T>(method, requestUri, parameters, cancellationToken, new Dictionary<string,string>()
+      {
+        { "Authorization", String.Format("OAuth {0}", AccessToken) }
+      });
+    }
+
+
+    public async Task<T> Request<T>(HttpMethod method, string requestUri, Dictionary<string, string> parameters = null, CancellationToken cancellationToken = default(CancellationToken), Dictionary<string, string> headers = null) where T : class, new()
     {
       HttpRequestMessage request = new HttpRequestMessage(method, requestUri);
       HttpResponseMessage response = null;
       string responseString = null;
 
-      if (parameters == null)
-      {
-        parameters = new Dictionary<string, string>();
-      }
-
       // content of the request
-      request.Content = new FormUrlEncodedContent(parameters);
+      if (parameters != null)
+      {
+        request.Content = new FormUrlEncodedContent(parameters);
+      }
+      // additional headers
+      if (headers != null)
+      {
+        foreach (KeyValuePair<string, string> header in headers)
+        {
+          request.Headers.Add(header.Key, header.Value);
+        }
+      }
 
       // make async request
       try
@@ -93,6 +116,7 @@ namespace FeedlySharp
           {
             new BoolConverter(),
             new UnixDateTimeConverter(),
+            new TimeSpanConverter(),
             new NullableIntConverter(),
             new UriConverter()
           }

@@ -25,7 +25,6 @@ namespace FeedlySharp.Models
     public string AccessToken { get; set; }
 
     [JsonProperty("expires_in")]
-    [JsonConverter(typeof(TimeSpanConverter))]
     public TimeSpan ExpiresIn { get; set; }
 
     [JsonProperty("refresh_token")]
