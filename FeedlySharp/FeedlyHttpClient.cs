@@ -88,6 +88,15 @@ namespace FeedlySharp
         }
       }
 
+      if (responseString == "[]")
+      {
+        return new T();
+      }
+      if ((new string[] { "", "{}" }).Contains(responseString))
+      {
+        return null;
+      }
+
       return DeserializeJson<T>(responseString);
     }
 
