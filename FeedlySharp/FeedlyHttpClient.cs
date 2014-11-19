@@ -32,14 +32,28 @@ namespace FeedlySharp
         throw new FeedlySharpException("This request requires an access token.");
       }
       
-      return await Request<T>(method, requestUri, parameters, cancellationToken, new Dictionary<string,string>()
+      return await Request<T>(method, requestUri, parameters, null, cancellationToken, new Dictionary<string,string>()
       {
         { "Authorization", String.Format("OAuth {0}", AccessToken) }
       });
     }
 
 
-    public async Task<T> Request<T>(HttpMethod method, string requestUri, Dictionary<string, string> parameters = null, CancellationToken cancellationToken = default(CancellationToken), Dictionary<string, string> headers = null) where T : class, new()
+    public async Task<T> AuthRequest<T>(HttpMethod method, string requestUri, dynamic body = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class, new()
+    {
+      if (String.IsNullOrEmpty(AccessToken))
+      {
+        throw new FeedlySharpException("This request requires an access token.");
+      }
+
+      return await Request<T>(method, requestUri, null, body, cancellationToken, new Dictionary<string, string>()
+      {
+        { "Authorization", String.Format("OAuth {0}", AccessToken) }
+      });
+    }
+
+
+    public async Task<T> Request<T>(HttpMethod method, string requestUri, Dictionary<string, string> parameters = null, dynamic body = null, CancellationToken cancellationToken = default(CancellationToken), Dictionary<string, string> headers = null) where T : class, new()
     {
       HttpRequestMessage request = new HttpRequestMessage(method, requestUri);
       HttpResponseMessage response = null;
@@ -57,6 +71,11 @@ namespace FeedlySharp
         {
           request.Headers.Add(header.Key, header.Value);
         }
+      }
+      // body
+      if (body != null)
+      {
+        request.Content = new StringContent(JsonConvert.SerializeObject(body));
       }
 
       // make async request

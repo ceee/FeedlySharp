@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,8 @@ namespace FeedlySharp
 
     private string AccessToken { get; set; }
 
+    private string UserId { get; set; }
+
     private FeedlyHttpClient Client { get; set; }
 
 
@@ -38,9 +41,10 @@ namespace FeedlySharp
     }
 
 
-    public void Activate(string accessToken)
+    public void Activate(string accessToken, string userId)
     {
       AccessToken = accessToken;
+      UserId = userId;
       Client.AccessToken = accessToken;
     }
 
@@ -48,6 +52,11 @@ namespace FeedlySharp
     private string GetCloudUri(CloudEnvironment environment)
     {
       return String.Format("https://{0}.feedly.com", environment == CloudEnvironment.Production ? "cloud" : "sandbox");
+    }
+
+    private string ValueToResource(string key, string value)
+    {
+      return WebUtility.UrlEncode(String.Format("user/{0}/{1}/{2}", UserId, key, value));
     }
 
 

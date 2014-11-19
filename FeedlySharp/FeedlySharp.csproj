@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
+    <Compile Include="FeedlyClient.Tags.cs" />
     <Compile Include="FeedlyClient.Auth.cs" />
     <Compile Include="FeedlyClient.Categories.cs" />
     <Compile Include="FeedlyClient.cs" />
@@ -43,6 +44,7 @@
     <Compile Include="FeedlyHttpClient.cs" />
     <Compile Include="FeedlySharpException.cs" />
     <Compile Include="Models\FeedlyCategory.cs" />
+    <Compile Include="Models\FeedlyTag.cs" />
     <Compile Include="Models\FeedlyUser.cs" />
     <Compile Include="Models\Responses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
