@@ -34,6 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Endpoints\Topic.cs" />
+    <Compile Include="Models\FeedlyTopic.cs" />
     <Compile Include="Endpoints\OPML.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
