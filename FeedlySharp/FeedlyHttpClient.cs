@@ -59,8 +59,6 @@ namespace FeedlySharp
     )
     {
       HttpRequestMessage request = new HttpRequestMessage(method, requestUri);
-      HttpResponseMessage response = null;
-      string responseString = null;
 
       // content of the request
       if (body != null && !bodyAsJson)
@@ -77,6 +75,15 @@ namespace FeedlySharp
       {
         request.Headers.Add("Authorization", String.Format("OAuth {0}", AccessToken));
       }
+
+      return await Request(request, cancellationToken);
+    }
+
+
+    public async Task<string> Request(HttpRequestMessage request, CancellationToken cancellationToken = default(CancellationToken))
+    {
+      HttpResponseMessage response = null;
+      string responseString = null;
 
       // make async request
       try
