@@ -34,7 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Endpoints\Topic.cs" />
+    <Compile Include="Endpoints\Subscriptions.cs" />
+    <Compile Include="Endpoints\Topics.cs" />
+    <Compile Include="Models\FeedlySubscription.cs" />
     <Compile Include="Models\FeedlyTopic.cs" />
     <Compile Include="Endpoints\OPML.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
@@ -44,7 +46,7 @@
     <Compile Include="Endpoints\Auth.cs" />
     <Compile Include="Endpoints\Categories.cs" />
     <Compile Include="FeedlyClient.cs" />
-    <Compile Include="Endpoints\User.cs" />
+    <Compile Include="Endpoints\Profile.cs" />
     <Compile Include="FeedlyHttpClient.cs" />
     <Compile Include="FeedlySharpException.cs" />
     <Compile Include="Models\FeedlyCategory.cs" />

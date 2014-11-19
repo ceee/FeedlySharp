@@ -54,9 +54,10 @@ namespace FeedlySharp
       return String.Format("https://{0}.feedly.com", environment == CloudEnvironment.Production ? "cloud" : "sandbox");
     }
 
-    private string ValueToResource(string key, string value)
+    private string ValueToResource(string key, string value, bool encode = true)
     {
-      return WebUtility.UrlEncode(String.Format("user/{0}/{1}/{2}", UserId, key, value));
+      string text = String.Format("user/{0}/{1}/{2}", UserId, key, value);
+      return encode ? WebUtility.UrlEncode(text) : text;
     }
 
 

@@ -24,7 +24,7 @@ namespace FeedlySharp
         throw new ArgumentOutOfRangeException("Select low, medium or high for the interest.");
       }
 
-      await Client.Request(HttpMethod.Post, "v3/topics", new { id = ValueToResource("topic", topic), interest = interest.ToString().ToLower() }, false, true, cancellationToken);
+      await Client.Request(HttpMethod.Post, "v3/topics", new { id = ValueToResource("topic", topic, false), interest = interest.ToString().ToLower() }, true, true, cancellationToken);
       return true;
     }
 
