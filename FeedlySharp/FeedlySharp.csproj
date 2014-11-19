@@ -34,14 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Endpoints\OPML.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
-    <Compile Include="FeedlyClient.Preferences.cs" />
-    <Compile Include="FeedlyClient.Tags.cs" />
-    <Compile Include="FeedlyClient.Auth.cs" />
-    <Compile Include="FeedlyClient.Categories.cs" />
+    <Compile Include="Endpoints\Preferences.cs" />
+    <Compile Include="Endpoints\Tags.cs" />
+    <Compile Include="Endpoints\Auth.cs" />
+    <Compile Include="Endpoints\Categories.cs" />
     <Compile Include="FeedlyClient.cs" />
-    <Compile Include="FeedlyClient.User.cs" />
+    <Compile Include="Endpoints\User.cs" />
     <Compile Include="FeedlyHttpClient.cs" />
     <Compile Include="FeedlySharpException.cs" />
     <Compile Include="Models\FeedlyCategory.cs" />

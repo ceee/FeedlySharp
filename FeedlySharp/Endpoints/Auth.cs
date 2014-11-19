@@ -55,7 +55,7 @@ namespace FeedlySharp
         { "client_secret", ClientSecret },
         { "redirect_uri", RedirectUri },
         { "grant_type", "authorization_code" }
-      }, cancellationToken);
+      }, false, false, cancellationToken);
     }
 
 
@@ -67,7 +67,7 @@ namespace FeedlySharp
         { "client_id", ClientId },
         { "client_secret", ClientSecret },
         { "grant_type", "refresh_token" }
-      }, cancellationToken);
+      }, false, false, cancellationToken);
     }
 
 
@@ -79,7 +79,7 @@ namespace FeedlySharp
         { "client_id", ClientId },
         { "client_secret", ClientSecret },
         { "grant_type", "revoke_token" }
-      }, cancellationToken);
+      }, false, false, cancellationToken);
     }
   }
 }

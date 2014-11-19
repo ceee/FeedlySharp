@@ -25,83 +25,57 @@ namespace FeedlySharp
     }
 
 
-    public async Task<T> AuthRequest<T>(HttpMethod method, string requestUri, Dictionary<string, string> parameters = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class, new()
-    {
-      if (String.IsNullOrEmpty(AccessToken))
-      {
-        throw new FeedlySharpException("This request requires an access token.");
-      }
-      
-      return await Request<T>(method, requestUri, parameters, null, false, cancellationToken, new Dictionary<string,string>()
-      {
-        { "Authorization", String.Format("OAuth {0}", AccessToken) }
-      });
-    }
-
-
-    public async Task<T> AuthRequest<T>(HttpMethod method, string requestUri, Dictionary<string, string> parameters = null, bool bodyAsJson = false, CancellationToken cancellationToken = default(CancellationToken)) where T : class, new()
-    {
-      if (String.IsNullOrEmpty(AccessToken))
-      {
-        throw new FeedlySharpException("This request requires an access token.");
-      }
-
-      return await Request<T>(method, requestUri, parameters, null, bodyAsJson, cancellationToken, new Dictionary<string, string>()
-      {
-        { "Authorization", String.Format("OAuth {0}", AccessToken) }
-      });
-    }
-
-
-    public async Task<T> AuthRequest<T>(HttpMethod method, string requestUri, dynamic body = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class, new()
-    {
-      if (String.IsNullOrEmpty(AccessToken))
-      {
-        throw new FeedlySharpException("This request requires an access token.");
-      }
-
-      return await Request<T>(method, requestUri, null, body, true, cancellationToken, new Dictionary<string, string>()
-      {
-        { "Authorization", String.Format("OAuth {0}", AccessToken) }
-      });
-    }
-
-
     public async Task<T> Request<T>(
       HttpMethod method, 
       string requestUri, 
-      Dictionary<string, string> parameters = null, 
-      dynamic body = null, 
+      object body = null, 
       bool bodyAsJson = false, 
-      CancellationToken cancellationToken = default(CancellationToken), 
-      Dictionary<string, string> headers = null
+      bool isOauth = true,
+      CancellationToken cancellationToken = default(CancellationToken)
     ) where T : class, new()
+    {
+      string responseString = await Request(method, requestUri, body, bodyAsJson, isOauth, cancellationToken);
+
+      if (responseString == "[]")
+      {
+        return new T();
+      }
+      if ((new string[] { "", "{}" }).Contains(responseString))
+      {
+        return null;
+      }
+
+      return DeserializeJson<T>(responseString);
+    }
+
+
+    public async Task<string> Request(
+      HttpMethod method, 
+      string requestUri, 
+      object body = null, 
+      bool bodyAsJson = false, 
+      bool isOauth = true,
+      CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
       HttpRequestMessage request = new HttpRequestMessage(method, requestUri);
       HttpResponseMessage response = null;
       string responseString = null;
 
       // content of the request
-      if (parameters != null && !bodyAsJson)
+      if (body != null && !bodyAsJson)
       {
-        request.Content = new FormUrlEncodedContent(parameters);
+        request.Content = new FormUrlEncodedContent(body as Dictionary<string, string>);
       }
-      else if (parameters != null)
-      {
-        request.Content = new StringContent(JsonConvert.SerializeObject(parameters));
-      }
-      // additional headers
-      if (headers != null)
-      {
-        foreach (KeyValuePair<string, string> header in headers)
-        {
-          request.Headers.Add(header.Key, header.Value);
-        }
-      }
-      // body
-      if (body != null)
+      else if (body != null)
       {
         request.Content = new StringContent(JsonConvert.SerializeObject(body));
+      }
+
+      // OAuth header
+      if (isOauth)
+      {
+        request.Headers.Add("Authorization", String.Format("OAuth {0}", AccessToken));
       }
 
       // make async request
@@ -133,16 +107,7 @@ namespace FeedlySharp
         }
       }
 
-      if (responseString == "[]")
-      {
-        return new T();
-      }
-      if ((new string[] { "", "{}" }).Contains(responseString))
-      {
-        return null;
-      }
-
-      return DeserializeJson<T>(responseString);
+      return responseString;
     }
 
 
