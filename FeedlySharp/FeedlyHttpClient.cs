@@ -32,7 +32,21 @@ namespace FeedlySharp
         throw new FeedlySharpException("This request requires an access token.");
       }
       
-      return await Request<T>(method, requestUri, parameters, null, cancellationToken, new Dictionary<string,string>()
+      return await Request<T>(method, requestUri, parameters, null, false, cancellationToken, new Dictionary<string,string>()
+      {
+        { "Authorization", String.Format("OAuth {0}", AccessToken) }
+      });
+    }
+
+
+    public async Task<T> AuthRequest<T>(HttpMethod method, string requestUri, Dictionary<string, string> parameters = null, bool bodyAsJson = false, CancellationToken cancellationToken = default(CancellationToken)) where T : class, new()
+    {
+      if (String.IsNullOrEmpty(AccessToken))
+      {
+        throw new FeedlySharpException("This request requires an access token.");
+      }
+
+      return await Request<T>(method, requestUri, parameters, null, bodyAsJson, cancellationToken, new Dictionary<string, string>()
       {
         { "Authorization", String.Format("OAuth {0}", AccessToken) }
       });
@@ -46,23 +60,35 @@ namespace FeedlySharp
         throw new FeedlySharpException("This request requires an access token.");
       }
 
-      return await Request<T>(method, requestUri, null, body, cancellationToken, new Dictionary<string, string>()
+      return await Request<T>(method, requestUri, null, body, true, cancellationToken, new Dictionary<string, string>()
       {
         { "Authorization", String.Format("OAuth {0}", AccessToken) }
       });
     }
 
 
-    public async Task<T> Request<T>(HttpMethod method, string requestUri, Dictionary<string, string> parameters = null, dynamic body = null, CancellationToken cancellationToken = default(CancellationToken), Dictionary<string, string> headers = null) where T : class, new()
+    public async Task<T> Request<T>(
+      HttpMethod method, 
+      string requestUri, 
+      Dictionary<string, string> parameters = null, 
+      dynamic body = null, 
+      bool bodyAsJson = false, 
+      CancellationToken cancellationToken = default(CancellationToken), 
+      Dictionary<string, string> headers = null
+    ) where T : class, new()
     {
       HttpRequestMessage request = new HttpRequestMessage(method, requestUri);
       HttpResponseMessage response = null;
       string responseString = null;
 
       // content of the request
-      if (parameters != null)
+      if (parameters != null && !bodyAsJson)
       {
         request.Content = new FormUrlEncodedContent(parameters);
+      }
+      else if (parameters != null)
+      {
+        request.Content = new StringContent(JsonConvert.SerializeObject(parameters));
       }
       // additional headers
       if (headers != null)

@@ -16,18 +16,15 @@ namespace FeedlySharp
     }
 
 
-    public async Task UpdateCategory(string id, string label, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task RenameCategory(string id, string label, CancellationToken cancellationToken = default(CancellationToken))
     {
-      await Client.AuthRequest<FeedlyUser>(HttpMethod.Post, String.Format("v3/categories/{0}", id), new Dictionary<string, string>()
-      {
-        { "label", label }
-      }, cancellationToken);
+      await Client.AuthRequest<FeedlyUser>(HttpMethod.Post, String.Format("v3/categories/{0}", ValueToResource("category", id)), new { label = label }, cancellationToken);
     }
 
 
     public async Task DeleteCategory(string id, CancellationToken cancellationToken = default(CancellationToken))
     {
-      await Client.AuthRequest<FeedlyUser>(HttpMethod.Delete, String.Format("v3/categories/{0}", id), null, cancellationToken);
+      await Client.AuthRequest<FeedlyUser>(HttpMethod.Delete, String.Format("v3/categories/{0}", ValueToResource("category", id)), null, cancellationToken);
     }
   }
 }

@@ -16,7 +16,7 @@ namespace FeedlySharp
     }
 
 
-    public async Task<FeedlyUser> UpdateUser(Dictionary<string, string> parameters, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<FeedlyUser> UpdateUser(dynamic parameters, CancellationToken cancellationToken = default(CancellationToken))
     {
       return await Client.AuthRequest<FeedlyUser>(HttpMethod.Post, "v3/profile", parameters, cancellationToken);
     }

@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
+    <Compile Include="FeedlyClient.Preferences.cs" />
     <Compile Include="FeedlyClient.Tags.cs" />
     <Compile Include="FeedlyClient.Auth.cs" />
     <Compile Include="FeedlyClient.Categories.cs" />
