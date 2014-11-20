@@ -18,7 +18,7 @@
 6. ✔ Topics endpoint
 7. ✔ OPML endpoint
 8. Entries endpoint
-9. Feeds endpoint
+9. ✔ Feeds endpoint
 10. Markers endpoint
 11. Mixes endpoint
 12. Search endpoint

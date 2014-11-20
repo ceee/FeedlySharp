@@ -34,11 +34,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Endpoints\Entries.cs" />
     <Compile Include="Endpoints\Feeds.cs" />
     <Compile Include="Endpoints\Subscriptions.cs" />
     <Compile Include="Endpoints\Topics.cs" />
+    <Compile Include="Models\FeedlyEntry.cs" />
     <Compile Include="Models\FeedlyFeed.cs" />
+    <Compile Include="Models\FeedlyImage.cs" />
+    <Compile Include="Models\FeedlyLink.cs" />
+    <Compile Include="Models\FeedlyOrigin.cs" />
     <Compile Include="Models\FeedlySubscription.cs" />
+    <Compile Include="Models\FeedlyText.cs" />
     <Compile Include="Models\FeedlyTopic.cs" />
     <Compile Include="Endpoints\OPML.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />

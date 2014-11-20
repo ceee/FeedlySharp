@@ -11,6 +11,6 @@ namespace FeedlySharp.Models
 
     public string Label { get; set; }
 
-    public bool IsGlobal { get; set; }
+    public bool IsGlobal { get { return Name.StartsWith("global."); } }
   }
 }
