@@ -23,7 +23,7 @@
 11. Mixes endpoint
 12. Search endpoint
 13. Streams endpoint
-14. Subscriptions endpoint
+14. ✔ Subscriptions endpoint
 15. Social endpoint (Dropbox, Evernote, Facebook, Microsoft, Twitter)
 
 ## Supported platforms
