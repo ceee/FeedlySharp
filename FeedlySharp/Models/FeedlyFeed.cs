@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FeedlySharp.Models
 {
-  public class FeedlySubscription
+  public class FeedlyFeed
   {
     public string Id { get; set; }
 
@@ -28,8 +28,6 @@ namespace FeedlySharp.Models
     [JsonProperty("website")]
     public Uri Uri { get; set; }
 
-    public List<FeedlyCategory> Categories { get; set; }
-
     public string[] Topics { get; set; }
 
     public string Language { get; set; }
@@ -40,7 +38,14 @@ namespace FeedlySharp.Models
 
     public double? Velocity { get; set; }
 
-    [JsonProperty("updated")]
-    public DateTime? UpdateDate { get; set; }
+    [JsonProperty("facebookUsername")]
+    public string FacebookName { get; set; }
+
+    public int? FacebookLikes { get; set; }
+
+    [JsonProperty("twitterScreenName")]
+    public string TwitterName { get; set; }
+
+    public int? TwitterFollowers { get; set; }
   }
 }

@@ -34,8 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Endpoints\Feeds.cs" />
     <Compile Include="Endpoints\Subscriptions.cs" />
     <Compile Include="Endpoints\Topics.cs" />
+    <Compile Include="Models\FeedlyFeed.cs" />
     <Compile Include="Models\FeedlySubscription.cs" />
     <Compile Include="Models\FeedlyTopic.cs" />
     <Compile Include="Endpoints\OPML.cs" />
