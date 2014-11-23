@@ -42,6 +42,12 @@ namespace FeedlySharp.Models
     public List<FeedlyCategoryUnreadCount> List { get; set; }
   }
 
+  internal class MixesResponse
+  {
+    [JsonProperty("items")]
+    public List<FeedlyEntry> List { get; set; }
+  }
+
 
   public enum FeedlyUserAccountPlan
   {

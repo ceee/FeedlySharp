@@ -28,7 +28,7 @@ namespace FeedlySharp.Extensions
 
     internal static string ToQueryString(this IDictionary<string, string> dict)
     {
-      if (dict.Count == 0) return string.Empty;
+      if (dict.Count == 0) return String.Empty;
 
       var buffer = new StringBuilder();
       int count = 0;
@@ -36,9 +36,17 @@ namespace FeedlySharp.Extensions
 
       foreach (var key in dict.Keys)
       {
+        if (String.IsNullOrWhiteSpace(dict[key]))
+        {
+          continue;
+        }
+
         string value = WebUtility.UrlEncode(dict[key]);
 
-        if (count == dict.Count - 1) end = true;
+        if (count == dict.Count - 1)
+        {
+          end = true;
+        }
 
         if (end) buffer.AppendFormat("{0}={1}", key, value);
         else buffer.AppendFormat("{0}={1}&", key, value);
