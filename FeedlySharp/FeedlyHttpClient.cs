@@ -58,14 +58,15 @@ namespace FeedlySharp
       CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-      HttpRequestMessage request = new HttpRequestMessage(method, requestUri);
+      string append = body != null && !bodyAsJson && method == HttpMethod.Get ? ((requestUri.Contains("?") ? "&" : "?") + (body as Dictionary<string, string>).ToQueryString()) : "";
+      HttpRequestMessage request = new HttpRequestMessage(method, requestUri + append);
 
       // content of the request
-      if (body != null && !bodyAsJson)
+      if (body != null && !bodyAsJson && method != HttpMethod.Get)
       {
         request.Content = new FormUrlEncodedContent(body as Dictionary<string, string>);
       }
-      else if (body != null)
+      else if (body != null && method != HttpMethod.Get)
       {
         request.Content = new StringContent(JsonConvert.SerializeObject(body));
       }

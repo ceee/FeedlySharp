@@ -1,6 +1,7 @@
 ﻿using FeedlySharp.Extensions;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace FeedlySharp.Models
 {
@@ -32,6 +33,13 @@ namespace FeedlySharp.Models
 
     [JsonProperty("plan")]
     public FeedlyUserAccountPlan UserAccountPlan { get; set; } 
+  }
+
+
+  internal class CategoryUnreadCountResponse
+  {
+    [JsonProperty("unreadcounts")]
+    public List<FeedlyCategoryUnreadCount> List { get; set; }
   }
 
 

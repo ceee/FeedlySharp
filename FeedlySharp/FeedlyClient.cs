@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FeedlySharp
 {
-  public partial class FeedlyClient : IDisposable, FeedlySharp.IFeedlyClient
+  public partial class FeedlyClient : IDisposable
   {
     public readonly CloudEnvironment Environment;
 
@@ -56,7 +56,7 @@ namespace FeedlySharp
 
     private string ValueToResource(string key, string value, bool encode = true)
     {
-      string text = String.Format("user/{0}/{1}/{2}", UserId, key, value);
+      string text = value.StartsWith("user/") ? value : String.Format("user/{0}/{1}/{2}", UserId, key, value);
       return encode ? WebUtility.UrlEncode(text) : text;
     }
 

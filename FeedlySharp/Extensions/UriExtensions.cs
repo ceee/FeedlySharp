@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Text;
 
 namespace FeedlySharp.Extensions
 {
@@ -22,6 +23,30 @@ namespace FeedlySharp.Extensions
       }
 
       return output;
+    }
+
+
+    internal static string ToQueryString(this IDictionary<string, string> dict)
+    {
+      if (dict.Count == 0) return string.Empty;
+
+      var buffer = new StringBuilder();
+      int count = 0;
+      bool end = false;
+
+      foreach (var key in dict.Keys)
+      {
+        string value = WebUtility.UrlEncode(dict[key]);
+
+        if (count == dict.Count - 1) end = true;
+
+        if (end) buffer.AppendFormat("{0}={1}", key, value);
+        else buffer.AppendFormat("{0}={1}&", key, value);
+
+        count++;
+      }
+
+      return buffer.ToString();
     }
   }
 }
