@@ -49,6 +49,13 @@ namespace FeedlySharp.Models
   }
 
 
+  internal class FindFeedsResponse
+  {
+    [JsonProperty("results")]
+    public List<FeedlySearchFeed> List { get; set; }
+  }
+
+
   public enum FeedlyUserAccountPlan
   {
     Standard,

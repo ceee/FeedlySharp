@@ -9,7 +9,7 @@ namespace FeedlySharp.Models
 {
   public class FeedlyFeed
   {
-    public string Id { get; set; }
+    public virtual string Id { get; set; }
 
     [JsonProperty("title")]
     public string Name { get; set; }
