@@ -4,7 +4,7 @@
 
 ---
 
-## This project is work in progress! Status:
+**This project is work in progress.<br>Status:**
 
 1. ✔ Add implementation for all endpoints
 2. Write tests
