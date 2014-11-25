@@ -51,6 +51,8 @@
     <Compile Include="Models\FeedlyReadOperations.cs" />
     <Compile Include="Models\FeedlySearchFeed.cs" />
     <Compile Include="Models\FeedlySearchResponse.cs" />
+    <Compile Include="Models\FeedlyStreamEntriesResponse.cs" />
+    <Compile Include="Models\FeedlyStreamEntryIdsResponse.cs" />
     <Compile Include="Models\FeedlySubscription.cs" />
     <Compile Include="Models\FeedlyText.cs" />
     <Compile Include="Models\FeedlyTopic.cs" />

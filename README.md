@@ -4,27 +4,10 @@
 
 ---
 
-**This project is work in progress!**
+## This project is work in progress! Status:
 
----
-
-## Status
-
-1. ✔ Authentication / OAuth
-2. ✔ Categories endpoint
-3. ✔ Profile endpoint
-4. ✔ Preferences endpoint
-5. ✔ Tags endpoint
-6. ✔ Topics endpoint
-7. ✔ OPML endpoint
-8. ✔ Entries endpoint
-9. ✔ Feeds endpoint
-10. ✔ Markers endpoint
-11. ✔ Mixes endpoint
-12. Search endpoint
-13. Streams endpoint
-14. ✔ Subscriptions endpoint
-15. Social endpoint (Dropbox, Evernote, Facebook, Microsoft, Twitter)
+1. ✔ Add implementation for all endpoints
+2. Write tests
 
 ## Supported platforms
 

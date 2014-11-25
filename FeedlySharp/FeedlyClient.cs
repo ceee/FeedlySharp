@@ -56,8 +56,22 @@ namespace FeedlySharp
 
     private string ValueToResource(string key, string value, bool encode = true)
     {
-      string text = value.StartsWith("user/") ? value : String.Format("user/{0}/{1}/{2}", UserId, key, value);
+      string text;
+      if (key == "feed") text = value.StartsWith("feed/") ? value : "feed/" + value;
+      else text = value.StartsWith("user/") ? value : String.Format("user/{0}/{1}/{2}", UserId, key, value);
+
       return encode ? WebUtility.UrlEncode(text) : text;
+    }
+
+    private string ValueToResource(ContentType type, string value, bool encode = true)
+    {
+      string key = type == ContentType.Feed ? "feed" : (type == ContentType.Tag ? "tag" : (type == ContentType.SystemCategory ? "systemcategory" : "category"));
+      if (key == "systemcategory")
+      {
+        return encode ? WebUtility.UrlEncode(value) : value;
+      }
+
+      return ValueToResource(key, value, encode);
     }
 
 
@@ -71,5 +85,13 @@ namespace FeedlySharp
   {
     Production,
     Sandbox
+  }
+
+  public enum ContentType
+  {
+    Feed,
+    Category,
+    SystemCategory,
+    Tag
   }
 }
