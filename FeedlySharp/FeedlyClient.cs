@@ -9,6 +9,9 @@ namespace FeedlySharp
 {
   public partial class FeedlyClient : IDisposable
   {
+    /// <summary>
+    /// The environment of feedly.
+    /// </summary>
     public readonly CloudEnvironment Environment;
 
     private readonly string ClientId;
@@ -25,7 +28,14 @@ namespace FeedlySharp
 
     private FeedlyHttpClient Client { get; set; }
 
-
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FeedlyClient"/> class.
+    /// </summary>
+    /// <param name="environment">The environment of feedly.</param>
+    /// <param name="clientId">The client id.</param>
+    /// <param name="clientSecret">The client secret.</param>
+    /// <param name="redirectUri">The redirect URI.</param>
+    /// <exception cref="System.ArgumentNullException">redirectUri;Authentication and token generation requires an URI to redirect to afterwards</exception>
     public FeedlyClient(CloudEnvironment environment, string clientId, string clientSecret, string redirectUri)
     {
       if (String.IsNullOrEmpty(redirectUri))
@@ -40,12 +50,24 @@ namespace FeedlySharp
       Client = new FeedlyHttpClient(new Uri(CloudUri, UriKind.Absolute));
     }
 
-
+    /// <summary>
+    /// Activates the client to call methods which need authentication.
+    /// </summary>
+    /// <param name="accessToken">The access token.</param>
+    /// <param name="userId">The user id.</param>
     public void Activate(string accessToken, string userId)
     {
       AccessToken = accessToken;
       UserId = userId;
       Client.AccessToken = accessToken;
+    }
+
+    /// <summary>
+    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    public void Dispose()
+    {
+      Client.Dispose();
     }
 
 
@@ -72,12 +94,6 @@ namespace FeedlySharp
       }
 
       return ValueToResource(key, value, encode);
-    }
-
-
-    public void Dispose()
-    {
-      Client.Dispose();
     }
   }
 

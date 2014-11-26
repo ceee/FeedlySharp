@@ -9,6 +9,19 @@ namespace FeedlySharp
 {
   public partial class FeedlyClient
   {
+    /// <summary>
+    /// Get a list of entry ids for a specific stream.
+    /// </summary>
+    /// <remarks>streams-endpoint (https://developer.feedly.com/v3/streams/#get-a-list-of-entry-ids-for-a-specific-stream)</remarks>
+    /// <param name="id">A feedId, a categoryId, a tagId or a system category id.</param>
+    /// <param name="type">The type of the <paramref name="id"/>.</param>
+    /// <param name="count">Number of entry ids to return. Default is 20, max is 10000.</param>
+    /// <param name="sorting">Newest or oldest. Default is newest.</param>
+    /// <param name="unreadOnly">if <c>true</c>, return unread entry ids only.</param>
+    /// <param name="newerThan">Date from where to search on.</param>
+    /// <param name="continuation">A continuation id is used to page through the entry ids.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
     public async Task<FeedlyStreamEntryIdsResponse> GetStreamEntryIds(
       string id, 
       ContentType type, 
@@ -45,6 +58,19 @@ namespace FeedlySharp
     }
 
 
+    /// <summary>
+    /// Get a list of entries for a specific stream.
+    /// </summary>
+    /// <remarks>streams-endpoint (https://developer.feedly.com/v3/streams/#get-the-content-of-a-stream)</remarks>
+    /// <param name="id">A feedId, a categoryId, a tagId or a system category id.</param>
+    /// <param name="type">The type of the <paramref name="id"/>.</param>
+    /// <param name="count">Number of entry ids to return. Default is 20, max is 10000.</param>
+    /// <param name="sorting">Newest or oldest. Default is newest.</param>
+    /// <param name="unreadOnly">if <c>true</c>, return unread entries only.</param>
+    /// <param name="newerThan">Date from where to search on.</param>
+    /// <param name="continuation">A continuation id is used to page through the entries.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
     public async Task<FeedlyStreamEntriesResponse> GetStreamEntries(
       string id,
       ContentType type,
