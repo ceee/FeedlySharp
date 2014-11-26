@@ -7,7 +7,7 @@
 **This project is work in progress.<br>Status:**
 
 1. ✔ Add implementation for all endpoints
-2. Write inline documentation
+2. ✔ Write inline documentation
 2. Unit tests
 
 ## Supported platforms
