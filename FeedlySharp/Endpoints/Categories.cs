@@ -11,7 +11,6 @@ namespace FeedlySharp
   {
     /// <summary>
     /// Returns all categories created by the user.
-    /// Authentication required.
     /// </summary>
     /// <remarks>categories-endpoint (https://developer.feedly.com/v3/categories/#get-the-list-of-all-categories)</remarks>
     /// <param name="cancellationToken">The cancellation token.</param>
@@ -23,7 +22,6 @@ namespace FeedlySharp
 
     /// <summary>
     /// Renames a user category.
-    /// Authentication required.
     /// </summary>
     /// <remarks>categories-endpoint (https://developer.feedly.com/v3/categories/#change-the-label-of-an-existing-category)</remarks>
     /// <param name="id">The category id.</param>
@@ -37,7 +35,6 @@ namespace FeedlySharp
 
     /// <summary>
     /// Deletes a user category.
-    /// Authentication required.
     /// </summary>
     /// <remarks>categories-endpoint (https://developer.feedly.com/v3/categories/#delete-a-category)</remarks>
     /// <param name="id">The category id.</param>
