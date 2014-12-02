@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FeedlySharp
 {
-  public partial class FeedlyClient : IDisposable
+  public partial class FeedlyClient : IDisposable, FeedlySharp.IFeedlyClient
   {
     /// <summary>
     /// The environment of feedly.
