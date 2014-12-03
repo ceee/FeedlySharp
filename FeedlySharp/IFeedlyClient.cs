@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace FeedlySharp
 {
-  interface IFeedlyClient
+  public interface IFeedlyClient
   {
     void Activate(string accessToken, string userId);
     System.Threading.Tasks.Task<bool> AddOrUpdateSubscription(string id, System.Collections.Generic.List<FeedlySharp.Models.FeedlyCategory> categories = null, string optionalTitle = null, System.Threading.CancellationToken cancellationToken = default(CancellationToken));

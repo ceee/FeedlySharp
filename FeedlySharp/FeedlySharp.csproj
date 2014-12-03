@@ -42,6 +42,7 @@
     <Compile Include="Endpoints\Streams.cs" />
     <Compile Include="Endpoints\Subscriptions.cs" />
     <Compile Include="Endpoints\Topics.cs" />
+    <Compile Include="IFeedlyClient.cs" />
     <Compile Include="Models\FeedlyCategoryUnreadCount.cs" />
     <Compile Include="Models\FeedlyEntry.cs" />
     <Compile Include="Models\FeedlyFeed.cs" />
@@ -90,9 +91,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utilities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
