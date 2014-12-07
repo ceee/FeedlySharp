@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.github.com/ceee/FeedlySharp/master/LICENSE-MIT</licenseUrl>
+    <projectUrl>https://github.com/ceee/FeedlySharp</projectUrl>
+    <iconUrl>https://raw.github.com/ceee/FeedlySharp/master/feedlysharp.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>.NET library for the Feedly API.</description>
+    <language>en-US</language>
+    <releaseNotes>
+      <![CDATA[
+        For full release notes see https://github.com/ceee/FeedlySharp/blob/master/CHANGELOG.md
+      ]]>
+    </releaseNotes>
+    <copyright>Copyright by cee, 2014</copyright>
+    <tags>Feedly Feedly API FeedlySharp Tobias Klika cee</tags>
+  </metadata>
+</package>
