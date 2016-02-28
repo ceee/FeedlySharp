@@ -7,7 +7,7 @@ namespace FeedlySharp
   {
     void Activate(string accessToken, string userId);
     System.Threading.Tasks.Task<bool> AddOrUpdateSubscription(string id, System.Collections.Generic.List<FeedlySharp.Models.FeedlyCategory> categories = null, string optionalTitle = null, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
-    System.Threading.Tasks.Task<bool> AddOrUpdateTopic(string topicId, FeedlySharp.Models.Interest interest = Interest.Low, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
+    System.Threading.Tasks.Task<bool> AddOrUpdateTopic(string topicId, FeedlySharp.Models.Interest interest = FeedlySharp.Models.Interest.Low, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
     System.Threading.Tasks.Task DeleteCategory(string id, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
     void Dispose();
     System.Threading.Tasks.Task<FeedlySharp.Models.FeedlySearchResponse> FindEntries(string contentId, string searchQuery, DateTime? newerThan = null, string continuation = null, string fields = null, string embedded = null, string engagement = null, int? count = null, string locale = null, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
