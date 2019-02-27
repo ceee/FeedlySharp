@@ -126,7 +126,8 @@ namespace FeedlySharp
     /// <exception cref="PocketException">Parse error.</exception>
     private T DeserializeJson<T>(string json) where T : class, new()
     {
-      json = json.Replace("[]", "{}");
+      // TODO why was this line needed?
+      //json = json.Replace("[]", "{}"); 
 
       // deserialize object
       T parsedResponse = JsonConvert.DeserializeObject<T>(
